@@ -46,13 +46,13 @@ namespace compositionvisual
             visual.Brush = compositor.CreateColorBrush(Colors.Red);
 
             container.Children.InsertAtTop(visual);
-
-            visual = compositor.CreateSpriteVisual();
-            visual.Size = new Vector2(100, 100);
-            visual.Offset = new Vector3(20, 20, 1);
-            visual.Brush = compositor.CreateColorBrush(Color.FromArgb(128, 0, 255, 0));
             
-            container.Children.InsertAtTop(visual);
+            ScalarKeyFrameAnimation anim = compositor.CreateScalarKeyFrameAnimation();
+            anim.InsertKeyFrame(0.0f, 0.0f);
+            anim.InsertKeyFrame(1.0f, 360.0f);
+            anim.Duration = TimeSpan.FromSeconds(1);
+            anim.IterationBehavior = AnimationIterationBehavior.Forever;
+            visual.StartAnimation("RotationAngleInDegrees", anim);
         }
 
         public void Load(string entryPoint)
